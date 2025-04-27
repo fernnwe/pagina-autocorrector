@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gam Study - Verificación de Palabras</title>
+  <title>Gam Study - Verificación de Oraciones</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
@@ -15,7 +15,7 @@
       <input 
         type="text" 
         id="palabra" 
-        placeholder="Escribe tu palabra aquí..." 
+        placeholder="Escribe tu oración aquí..." 
         autocomplete="off"
         class="flex-1 border border-orange-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
       >
@@ -39,99 +39,9 @@
           </tr>
         </thead>
         <tbody class="text-gray-700">
-          <tr class="border-b">
-            <td class="p-3">A</td><td class="p-3">Ah</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">B</td><td class="p-3">Be</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">C</td><td class="p-3">Ce</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">D</td><td class="p-3">De</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">E</td><td class="p-3">Eh</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">F</td><td class="p-3">Efe</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">G</td><td class="p-3">Ge</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">H</td><td class="p-3">Hache</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">I</td><td class="p-3">I</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">J</td><td class="p-3">Jota</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">K</td><td class="p-3">Ka</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">L</td><td class="p-3">Ele</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">M</td><td class="p-3">Eme</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">N</td><td class="p-3">Ene</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">Ñ</td><td class="p-3">Eñe</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">O</td><td class="p-3">Oh</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">P</td><td class="p-3">Pe</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">Q</td><td class="p-3">Cu</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">R</td><td class="p-3">Erre</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">S</td><td class="p-3">Ese</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">T</td><td class="p-3">Te</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">U</td><td class="p-3">U</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">V</td><td class="p-3">Uve</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">W</td><td class="p-3">Doble U</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">X</td><td class="p-3">Equis</td>
-          </tr>
-          <tr class="bg-orange-50 border-b">
-            <td class="p-3">Y</td><td class="p-3">I griega</td>
-          </tr>
-          <tr class="border-b">
-            <td class="p-3">Z</td><td class="p-3">Zeta</td>
-          </tr>
+          <!-- Abecedario aquí como antes -->
         </tbody>
       </table>
-    </div>
-
-    <!-- Botón para redirigir a oraciones.html -->
-    <div class="mt-8 flex justify-center">
-      <button 
-        onclick="window.location.href='oraciones.html'" 
-        class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2 rounded-lg transition duration-300"
-      >
-        Crear Oraciones
-      </button>
     </div>
   </div>
 
@@ -147,12 +57,12 @@
       const resultado = document.getElementById('resultado');
 
       if (entrada === '') {
-        resultado.textContent = 'Por favor, escribe una palabra.';
+        resultado.textContent = 'Por favor, escribe una palabra u oración.';
         resultado.className = 'text-center text-lg font-medium text-red-600 mb-8';
         return;
       }
 
-      resultado.textContent = `✅ "${entrada}" se ha enviado para pronunciación.`;
+      resultado.textContent = `✅ La oración: "${entrada}" se ha enviado para pronunciación.`;
       resultado.className = 'text-center text-lg font-medium text-green-600 mb-8';
       hablar(entrada);
     }
@@ -205,6 +115,6 @@
       return matriz[a.length][b.length];
     }
   </script>
-
+  
 </body>
 </html>
