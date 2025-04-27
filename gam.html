@@ -132,7 +132,7 @@
       "camino", "juego", "palabra", "musica", "deporte"
     ];
   
-    function verificarPalabra() {
+  function verificarPalabra() {
   const entrada = document.getElementById('palabra').value.trim().toLowerCase();
   const resultado = document.getElementById('resultado');
 
@@ -145,28 +145,20 @@
   if (palabrasValidas.includes(entrada)) {
     resultado.textContent = `✅ ¡"${entrada}" está escrito correctamente!`;
     resultado.className = 'text-center text-lg font-medium text-green-600 mb-8';
+    hablar(entrada); // Pronunciar la palabra escrita correctamente
   } else {
     const sugerencia = sugerirPalabra(entrada);
     if (sugerencia) {
       resultado.textContent = `❌ "${entrada}" no está en el diccionario. ¿Quisiste decir "${sugerencia}"?`;
+      hablar(`¿Quisiste decir ${sugerencia}?`);
     } else {
-      resultado.textContent = `❌ "${entrada}" no está en el diccionario, pero igual la pronunciamos.`;
+      resultado.textContent = `❌ "${entrada}" no está en el diccionario y no encontramos sugerencias.`;
+      hablar(entrada); // Pronuncia lo que el usuario escribió aunque esté mal
     }
     resultado.className = 'text-center text-lg font-medium text-red-600 mb-8';
   }
-
-  // Siempre pronunciar la palabra escrita
-  hablar(entrada);
 }
 
-
-// ✅ Nueva función para leer en voz alta
-function hablar(texto) {
-  const mensaje = new SpeechSynthesisUtterance(texto);
-  mensaje.lang = 'es-ES'; // Español de España (puedes cambiar a 'es-MX' si quieres mexicano)
-  mensaje.rate = 0.9; // Velocidad de la voz (1 es normal)
-  window.speechSynthesis.speak(mensaje);
-}
 
 function hablar(texto) {
   const mensaje = new SpeechSynthesisUtterance(texto);
