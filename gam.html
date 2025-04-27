@@ -132,8 +132,8 @@
       "camino", "juego", "palabra", "musica", "deporte"
     ];
   
-  function verificarPalabra() {
-  const entrada = document.getElementById('palabra').value.trim().toLowerCase();
+ function verificarPalabra() {
+  const entrada = document.getElementById('palabra').value.trim();
   const resultado = document.getElementById('resultado');
 
   if (entrada === '') {
@@ -142,30 +142,18 @@
     return;
   }
 
-  if (palabrasValidas.includes(entrada)) {
-    resultado.textContent = `✅ ¡"${entrada}" está escrito correctamente!`;
-    resultado.className = 'text-center text-lg font-medium text-green-600 mb-8';
-    hablar(entrada); // Pronunciar la palabra escrita correctamente
-  } else {
-    const sugerencia = sugerirPalabra(entrada);
-    if (sugerencia) {
-      resultado.textContent = `❌ "${entrada}" no está en el diccionario. ¿Quisiste decir "${sugerencia}"?`;
-      hablar(`¿Quisiste decir ${sugerencia}?`);
-    } else {
-      resultado.textContent = `❌ "${entrada}" no está en el diccionario y no encontramos sugerencias.`;
-      hablar(entrada); // Pronuncia lo que el usuario escribió aunque esté mal
-    }
-    resultado.className = 'text-center text-lg font-medium text-red-600 mb-8';
-  }
+  resultado.textContent = `✅ "${entrada}" se ha enviado para pronunciación.`;
+  resultado.className = 'text-center text-lg font-medium text-green-600 mb-8';
+  hablar(entrada);
 }
-
 
 function hablar(texto) {
   const mensaje = new SpeechSynthesisUtterance(texto);
-  mensaje.lang = 'es-ES'; // Español (puedes cambiar a 'es-MX' si quieres un acento mexicano)
-  mensaje.rate = 0.9;     // Velocidad un poquito más lenta para que se entienda bien
+  mensaje.lang = 'es-ES'; // Español de España, o 'es-MX' si prefieres latino
+  mensaje.rate = 0.9;
   window.speechSynthesis.speak(mensaje);
 }
+
 
   
     function sugerirPalabra(palabra) {
