@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gam Study - Verificación de Palabras</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white shadow-2xl rounded-2xl p-8 max-w-3xl w-full">
+    <h1 class="text-4xl font-bold text-center text-orange-600 mb-2">Gam Study</h1>
+    <p class="text-center text-gray-600 mb-8">Porque todos podemos aprender a nuestra manera</p>
+
+    <div class="flex flex-col sm:flex-row items-center gap-4 mb-8">
+      <input 
+        type="text" 
+        id="palabra" 
+        placeholder="Escribe tu palabra aquí..." 
+        autocomplete="off"
+        class="flex-1 border border-orange-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+      >
+      <button 
+        onclick="verificarPalabra()" 
+        class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2 rounded-lg transition duration-300"
+      >
+        Verificar
+      </button>
+    </div>
+
+    <p id="resultado" class="text-center text-lg font-medium mb-8"></p>
+
+    <h2 class="text-2xl font-semibold text-orange-700 mb-4">Pronunciación del Abecedario</h2>
+    <div class="overflow-x-auto rounded-lg shadow-inner">
+      <table class="w-full table-auto border-collapse">
+        <thead>
+          <tr class="bg-orange-100 text-orange-700">
+            <th class="p-3 text-left">Letra</th>
+            <th class="p-3 text-left">Pronunciación</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-b">
+            <td class="p-3">A</td><td class="p-3">Ah</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">B</td><td class="p-3">Be</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">C</td><td class="p-3">Ce</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">D</td><td class="p-3">De</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">E</td><td class="p-3">Eh</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">F</td><td class="p-3">Efe</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">G</td><td class="p-3">Ge</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">H</td><td class="p-3">Hache</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">I</td><td class="p-3">I</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">J</td><td class="p-3">Jota</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">K</td><td class="p-3">Ka</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">L</td><td class="p-3">Ele</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">M</td><td class="p-3">Eme</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">N</td><td class="p-3">Ene</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">Ñ</td><td class="p-3">Eñe</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">O</td><td class="p-3">Oh</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">P</td><td class="p-3">Pe</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">Q</td><td class="p-3">Cu</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">R</td><td class="p-3">Erre</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">S</td><td class="p-3">Ese</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">T</td><td class="p-3">Te</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">U</td><td class="p-3">U</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">V</td><td class="p-3">Uve</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">W</td><td class="p-3">Doble U</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">X</td><td class="p-3">Equis</td>
+          </tr>
+          <tr class="bg-orange-50 border-b">
+            <td class="p-3">Y</td><td class="p-3">I griega</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3">Z</td><td class="p-3">Zeta</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const palabrasValidas = [
+      "manzana", "casa", "perro", "gato", "escuela", "universidad", "programacion",
+      "amigo", "familia", "estudio", "libro", "mesa", "silla", "ventana", "puerta",
+      "camino", "juego", "palabra", "musica", "deporte"
+    ];
+  
+    function verificarPalabra() {
+  const entrada = document.getElementById('palabra').value.trim().toLowerCase();
+  const resultado = document.getElementById('resultado');
+
+  if (entrada === '') {
+    resultado.textContent = 'Por favor, escribe una palabra.';
+    resultado.className = 'text-center text-lg font-medium text-red-600 mb-8';
+    return;
+  }
+
+  if (palabrasValidas.includes(entrada)) {
+    resultado.textContent = `✅ ¡"${entrada}" está escrito correctamente!`;
+    resultado.className = 'text-center text-lg font-medium text-green-600 mb-8';
+  } else {
+    const sugerencia = sugerirPalabra(entrada);
+    if (sugerencia) {
+      resultado.textContent = `❌ "${entrada}" no está en el diccionario. ¿Quisiste decir "${sugerencia}"?`;
+    } else {
+      resultado.textContent = `❌ "${entrada}" no está en el diccionario, pero igual la pronunciamos.`;
+    }
+    resultado.className = 'text-center text-lg font-medium text-red-600 mb-8';
+  }
+
+  // Siempre pronunciar la palabra escrita
+  hablar(entrada);
+}
+
+
+// ✅ Nueva función para leer en voz alta
+function hablar(texto) {
+  const mensaje = new SpeechSynthesisUtterance(texto);
+  mensaje.lang = 'es-ES'; // Español de España (puedes cambiar a 'es-MX' si quieres mexicano)
+  mensaje.rate = 0.9; // Velocidad de la voz (1 es normal)
+  window.speechSynthesis.speak(mensaje);
+}
+
+function hablar(texto) {
+  const mensaje = new SpeechSynthesisUtterance(texto);
+  mensaje.lang = 'es-ES'; // Español (puedes cambiar a 'es-MX' si quieres un acento mexicano)
+  mensaje.rate = 0.9;     // Velocidad un poquito más lenta para que se entienda bien
+  window.speechSynthesis.speak(mensaje);
+}
+
+  
+    function sugerirPalabra(palabra) {
+      let palabraCercana = '';
+      let menorDistancia = Infinity;
+  
+      palabrasValidas.forEach(valida => {
+        const distancia = calcularDistancia(palabra, valida);
+        if (distancia < menorDistancia) {
+          menorDistancia = distancia;
+          palabraCercana = valida;
+        }
+      });
+  
+      return menorDistancia <= 3 ? palabraCercana : null;
+    }
+  
+    function calcularDistancia(a, b) {
+      const matriz = [];
+  
+      for (let i = 0; i <= a.length; i++) {
+        matriz[i] = [i];
+      }
+      for (let j = 0; j <= b.length; j++) {
+        matriz[0][j] = j;
+      }
+  
+      for (let i = 1; i <= a.length; i++) {
+        for (let j = 1; j <= b.length; j++) {
+          if (a.charAt(i - 1) === b.charAt(j - 1)) {
+            matriz[i][j] = matriz[i - 1][j - 1];
+          } else {
+            matriz[i][j] = Math.min(
+              matriz[i - 1][j - 1] + 1,
+              matriz[i][j - 1] + 1,
+              matriz[i - 1][j] + 1
+            );
+          }
+        }
+      }
+      return matriz[a.length][b.length];
+    }
+  </script>
+  
+</body>
+</html>
